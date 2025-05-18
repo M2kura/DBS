@@ -17,7 +17,7 @@
     <ul>
         <li>User(<u>Username</u>, Password, First_Name, Last_Name, Email, Registration_Date)</li>
 
-        <li>Profile_Page(<u>URL</u>, Visibility, Username)
+        <li>Profile_Page(<u>URL</u>, Is_Public, Username)
             <ul><li>FK: Username ⊆ User(Username)</li></ul>
         </li>
 
@@ -73,7 +73,7 @@
             <ul><li>FK: Creator_Username ⊆ User(Username)</li></ul>
         </li>
 
-        <li>Includes(<u>Playlist_Title, Creator_Username, Song_Title, Album_Title, Primary_Album_Artist_Username</u>, Added_Date)
+        <li>Includes(<u>Playlist_Title, Creator_Username, Song_Title, Album_Title, Primary_Album_Artist_Username</u>)
             <ul>
                 <li>FK: (Playlist_Title, Creator_Username) ⊆ Playlist(Title, Creator_Username)</li>
                 <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username)</li>
