@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Streaming Service - Final Relational Model</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        h1 { color: #333; text-align: center; }
+        ul { list-style-type: none; padding-left: 20px; }
+        li { margin-bottom: 20px; }
+        ul ul { padding-left: 20px; }
+        u { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Music Streaming Service - Final Relational Model</h1>
+
+    <ul>
+        <li>User(<u>Username</u>, Password, First_Name, Last_Name, Email, Registration_Date)</li>
+
+        <li>Profile_Page(<u>URL</u>, Visibility, Username)
+            <ul><li>FK: Username ⊆ User(Username)</li></ul>
+        </li>
+
+        <li>Regular_User(<u>Username</u>, Subscription_Type, Payment_Method, Renewal_Date)
+            <ul><li>FK: Username ⊆ User(Username)</li></ul>
+        </li>
+
+        <li>Artist(<u>Username</u>, Stage_Name, Biography)
+            <ul><li>FK: Username ⊆ User(Username)</li></ul>
+        </li>
+
+        <li>Album(<u>Title, Primary_Artist_Username</u>, Release_Date, Total_Duration, Description)
+            <ul><li>FK: Primary_Artist_Username ⊆ Artist(Username)</li></ul>
+        </li>
+
+        <li>Album_Artist(<u>Album_Title, Primary_Artist_Username, Contributing_Artist_Username</u>, Role)
+            <ul>
+                <li>FK: (Album_Title, Primary_Artist_Username) ⊆ Album(Title, Primary_Artist_Username)</li>
+                <li>FK: Contributing_Artist_Username ⊆ Artist(Username)</li>
+            </ul>
+        </li>
+
+        <li>Song(<u>Title, Album_Title, Primary_Album_Artist_Username</u>, File_Path, Duration, Lyrics, Track_Number)
+            <ul>
+                <li>FK: (Album_Title, Primary_Album_Artist_Username) ⊆ Album(Title, Primary_Artist_Username)</li>
+            </ul>
+        </li>
+
+        <li>Song_Artist(<u>Song_Title, Album_Title, Primary_Album_Artist_Username, Performing_Artist_Username</u>, Role)
+            <ul>
+                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username)</li>
+                <li>FK: Performing_Artist_Username ⊆ Artist(Username)</li>
+            </ul>
+        </li>
+
+        <li>Genre(<u>Name</u>)</li>
+
+        <li>Album_Genre(<u>Album_Title, Primary_Artist_Username, Genre_Name</u>)
+            <ul>
+                <li>FK: (Album_Title, Primary_Artist_Username) ⊆ Album(Title, Primary_Artist_Username)</li>
+                <li>FK: Genre_Name ⊆ Genre(Name)</li>
+            </ul>
+        </li>
+
+        <li>Song_Genre(<u>Song_Title, Album_Title, Primary_Album_Artist_Username, Genre_Name</u>)
+            <ul>
+                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username)</li>
+                <li>FK: Genre_Name ⊆ Genre(Name)</li>
+            </ul>
+        </li>
+
+        <li>Playlist(<u>Title, Creator_Username</u>, Creation_Date, Is_Public, Description)
+            <ul><li>FK: Creator_Username ⊆ User(Username)</li></ul>
+        </li>
+
+        <li>Includes(<u>Playlist_Title, Creator_Username, Song_Title, Album_Title, Primary_Album_Artist_Username</u>, Added_Date)
+            <ul>
+                <li>FK: (Playlist_Title, Creator_Username) ⊆ Playlist(Title, Creator_Username)</li>
+                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username)</li>
+            </ul>
+        </li>
+
+        <li>Follows(<u>Follower, Following</u>)
+            <ul>
+                <li>FK: Follower ⊆ User(Username)</li>
+                <li>FK: Following ⊆ User(Username)</li>
+            </ul>
+        </li>
+
+        <li>Saves_Playlist(<u>Username, Playlist_Title, Creator_Username</u>)
+            <ul>
+                <li>FK: Username ⊆ User(Username)</li>
+                <li>FK: (Playlist_Title, Creator_Username) ⊆ Playlist(Title, Creator_Username)</li>
+            </ul>
+        </li>
+
+        <li>Saves_Album(<u>Username, Album_Title, Primary_Artist_Username</u>)
+            <ul>
+                <li>FK: Username ⊆ User(Username)</li>
+                <li>FK: (Album_Title, Primary_Artist_Username) ⊆ Album(Title, Primary_Artist_Username)</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
