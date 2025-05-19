@@ -33,38 +33,38 @@
             <ul><li>FK: Primary_Artist_Username ⊆ Artist(Username)</li></ul>
         </li>
 
-        <li>Album_Artist(<u>Album_Title, Primary_Artist_Username, Contributing_Artist_Username</u>, Role)
+        <li>Album_Artist(<u>Album_Title, Release_Date, Primary_Artist_Username, Contributing_Artist_Username</u>, Role)
             <ul>
-                <li>FK: (Album_Title, Primary_Artist_Username) ⊆ Album(Title, Primary_Artist_Username)</li>
+                <li>FK: (Album_Title, Release_Date, Primary_Artist_Username) ⊆ Album(Title, Release_Date, Primary_Artist_Username)</li>
                 <li>FK: Contributing_Artist_Username ⊆ Artist(Username)</li>
             </ul>
         </li>
 
-        <li>Song(<u>Title, Album_Title, Primary_Album_Artist_Username</u>, File_Path, Duration, Lyrics, Track_Number)
+        <li>Song(<u>Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date</u>, File_Path, Duration, Lyrics, Track_Number)
             <ul>
-                <li>FK: (Album_Title, Primary_Album_Artist_Username) ⊆ Album(Title, Primary_Artist_Username)</li>
+                <li>FK: (Album_Title, Primary_Album_Artist_Username, Album_Release_Date) ⊆ Album(Title, Primary_Artist_Username, Release_Date)</li>
             </ul>
         </li>
 
-        <li>Song_Artist(<u>Song_Title, Album_Title, Primary_Album_Artist_Username, Performing_Artist_Username</u>, Role)
+        <li>Song_Artist(<u>Song_Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date, Performing_Artist_Username</u>, Role)
             <ul>
-                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username)</li>
+                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date)</li>
                 <li>FK: Performing_Artist_Username ⊆ Artist(Username)</li>
             </ul>
         </li>
 
         <li>Genre(<u>Name</u>)</li>
 
-        <li>Album_Genre(<u>Album_Title, Primary_Artist_Username, Genre_Name</u>)
+        <li>Album_Genre(<u>Album_Title, Primary_Artist_Username, Release_Date, Genre_Name</u>)
             <ul>
-                <li>FK: (Album_Title, Primary_Artist_Username) ⊆ Album(Title, Primary_Artist_Username)</li>
+                <li>FK: (Album_Title, Primary_Artist_Username, Release_Date) ⊆ Album(Title, Primary_Artist_Username, Release_Date)</li>
                 <li>FK: Genre_Name ⊆ Genre(Name)</li>
             </ul>
         </li>
 
-        <li>Song_Genre(<u>Song_Title, Album_Title, Primary_Album_Artist_Username, Genre_Name</u>)
+        <li>Song_Genre(<u>Song_Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date, Genre_Name</u>)
             <ul>
-                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username)</li>
+				<li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username, Release_Date)</li>
                 <li>FK: Genre_Name ⊆ Genre(Name)</li>
             </ul>
         </li>
@@ -73,10 +73,10 @@
             <ul><li>FK: Creator_Username ⊆ User(Username)</li></ul>
         </li>
 
-        <li>Includes(<u>Playlist_Title, Creator_Username, Song_Title, Album_Title, Primary_Album_Artist_Username</u>)
+        <li>Includes(<u>Playlist_Title, Creator_Username, Song_Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date</u>)
             <ul>
                 <li>FK: (Playlist_Title, Creator_Username) ⊆ Playlist(Title, Creator_Username)</li>
-                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username)</li>
+                <li>FK: (Song_Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date) ⊆ Song(Title, Album_Title, Primary_Album_Artist_Username, Album_Release_Date)</li>
             </ul>
         </li>
 
