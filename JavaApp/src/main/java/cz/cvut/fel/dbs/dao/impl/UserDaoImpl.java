@@ -27,7 +27,8 @@ public class UserDaoImpl extends GenericDaoImpl<User, String> implements UserDao
 	@Override
 	public List<User> findByNameContaining(String name) {
 		TypedQuery<User> query = entityManager.createQuery(
-			"SELECT u FROM User u WHERE u.firstName LIKE :name OR u.lastName LIKE :name", User.class);
+			"SELECT u FROM User u LEFT JOIN FETCH u.profilePage " +
+			"WHERE u.firstName LIKE :name OR u.lastName LIKE :name", User.class);
 		query.setParameter("name", "%" + name + "%");
 		return query.getResultList();
 	}

@@ -1,7 +1,6 @@
 package cz.cvut.fel.dbs.service.impl;
 
 import cz.cvut.fel.dbs.dao.AlbumDao;
-import cz.cvut.fel.dbs.dao.GenreDao;
 import cz.cvut.fel.dbs.dao.SongDao;
 import cz.cvut.fel.dbs.dao.impl.AlbumDaoImpl;
 import cz.cvut.fel.dbs.dao.impl.GenericDaoImpl;
@@ -56,7 +55,18 @@ public class SongServiceImpl implements SongService {
 			songDao.save(song);
 
 			// Update album total duration
-			album.setTotalDuration(album.getTotalDuration() + duration);
+			long newTotalDuration = album.getTotalDuration() + duration;
+			System.out.println("Updating album duration from " + album.getTotalDuration() + 
+				" to " + newTotalDuration + " seconds");
+			album.setTotalDuration(newTotalDuration);
+
+			// Make sure to persist the updated album
+			em.flush();
+
+			// Refresh the album to ensure we have the latest data
+			em.refresh(album);
+
+			System.out.println("Album duration after update: " + album.getTotalDuration() + " seconds");
 
 			em.getTransaction().commit();
 			return song;

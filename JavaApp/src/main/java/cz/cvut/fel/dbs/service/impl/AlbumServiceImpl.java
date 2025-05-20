@@ -2,7 +2,6 @@ package cz.cvut.fel.dbs.service.impl;
 
 import cz.cvut.fel.dbs.dao.AlbumDao;
 import cz.cvut.fel.dbs.dao.ArtistDao;
-import cz.cvut.fel.dbs.dao.GenreDao;
 import cz.cvut.fel.dbs.dao.UserDao;
 import cz.cvut.fel.dbs.dao.impl.AlbumDaoImpl;
 import cz.cvut.fel.dbs.dao.impl.ArtistDaoImpl;
@@ -106,7 +105,16 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	public Optional<Album> findAlbum(String title, String artistUsername, Date releaseDate) {
 		Album.AlbumId albumId = new Album.AlbumId(title, artistUsername, releaseDate);
-		return albumDao.findById(albumId);
+		Optional<Album> albumOpt = albumDao.findById(albumId);
+
+		// If found, refresh the entity to ensure we have the latest data
+		albumOpt.ifPresent(album -> {
+			if (em.contains(album)) {
+				em.refresh(album);
+			}
+		});
+
+		return albumOpt;
 	}
 
 	@Override

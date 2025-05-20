@@ -161,7 +161,7 @@ public class Album {
 	}
 
 	public long getTotalDuration() {
-		return totalDuration;
+		return Math.max(0, totalDuration);
 	}
 
 	public void setTotalDuration(long totalDuration) {

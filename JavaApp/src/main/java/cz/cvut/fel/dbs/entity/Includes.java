@@ -33,159 +33,86 @@ public class Includes {
 	@Embeddable
 	public static class IncludesId implements Serializable {
 
-		@Embeddable
-		public static class PlaylistId implements Serializable {
-			@Column(name = "\"Playlist_Title\"")
-			private String playlistTitle;
+		@Column(name = "\"Playlist_Title\"")
+		private String playlistTitle;
 
-			@Column(name = "\"Creator_Username\"")
-			private String creatorUsername;
+		@Column(name = "\"Creator_Username\"")
+		private String creatorUsername;
 
-			public PlaylistId() {
-			}
+		@Column(name = "\"Song_Title\"")
+		private String songTitle;
 
-			public PlaylistId(String playlistTitle, String creatorUsername) {
-				this.playlistTitle = playlistTitle;
-				this.creatorUsername = creatorUsername;
-			}
+		@Column(name = "\"Album_Title\"")
+		private String albumTitle;
 
-			public String getPlaylistTitle() {
-				return playlistTitle;
-			}
+		@Column(name = "\"Primary_Album_Artist_Username\"")
+		private String primaryAlbumArtistUsername;
 
-			public void setPlaylistTitle(String playlistTitle) {
-				this.playlistTitle = playlistTitle;
-			}
-
-			public String getCreatorUsername() {
-				return creatorUsername;
-			}
-
-			public void setCreatorUsername(String creatorUsername) {
-				this.creatorUsername = creatorUsername;
-			}
-
-			@Override
-			public boolean equals(Object o) {
-				if (this == o) return true;
-				if (o == null || getClass() != o.getClass()) return false;
-				PlaylistId that = (PlaylistId) o;
-				return Objects.equals(playlistTitle, that.playlistTitle) && 
-				Objects.equals(creatorUsername, that.creatorUsername);
-			}
-
-			@Override
-			public int hashCode() {
-				return Objects.hash(playlistTitle, creatorUsername);
-			}
-		}
-
-		@Embeddable
-		public static class SongId implements Serializable {
-			@Column(name = "\"Song_Title\"")
-			private String songTitle;
-
-			@Column(name = "\"Album_Title\"")
-			private String albumTitle;
-
-			@Column(name = "\"Primary_Album_Artist_Username\"")
-			private String primaryAlbumArtistUsername;
-
-			@Column(name = "\"Album_Release_Date\"")
-			@Temporal(TemporalType.DATE)
-			private Date albumReleaseDate;
-
-			public SongId() {
-			}
-
-			public SongId(String songTitle, String albumTitle, String primaryAlbumArtistUsername, Date albumReleaseDate) {
-				this.songTitle = songTitle;
-				this.albumTitle = albumTitle;
-				this.primaryAlbumArtistUsername = primaryAlbumArtistUsername;
-				this.albumReleaseDate = albumReleaseDate;
-			}
-
-			public String getSongTitle() {
-				return songTitle;
-			}
-
-			public void setSongTitle(String songTitle) {
-				this.songTitle = songTitle;
-			}
-
-			public String getAlbumTitle() {
-				return albumTitle;
-			}
-
-			public void setAlbumTitle(String albumTitle) {
-				this.albumTitle = albumTitle;
-			}
-
-			public String getPrimaryAlbumArtistUsername() {
-				return primaryAlbumArtistUsername;
-			}
-
-			public void setPrimaryAlbumArtistUsername(String primaryAlbumArtistUsername) {
-				this.primaryAlbumArtistUsername = primaryAlbumArtistUsername;
-			}
-
-			public Date getAlbumReleaseDate() {
-				return albumReleaseDate;
-			}
-
-			public void setAlbumReleaseDate(Date albumReleaseDate) {
-				this.albumReleaseDate = albumReleaseDate;
-			}
-
-			@Override
-			public boolean equals(Object o) {
-				if (this == o) return true;
-				if (o == null || getClass() != o.getClass()) return false;
-				SongId songId = (SongId) o;
-				return Objects.equals(songTitle, songId.songTitle) &&
-				Objects.equals(albumTitle, songId.albumTitle) &&
-				Objects.equals(primaryAlbumArtistUsername, songId.primaryAlbumArtistUsername) &&
-				Objects.equals(albumReleaseDate, songId.albumReleaseDate);
-			}
-
-			@Override
-			public int hashCode() {
-				return Objects.hash(songTitle, albumTitle, primaryAlbumArtistUsername, albumReleaseDate);
-			}
-		}
-
-		private PlaylistId playlistId;
-		private SongId songId;
+		@Column(name = "\"Album_Release_Date\"")
+		@Temporal(TemporalType.DATE)
+		private Date albumReleaseDate;
 
 		public IncludesId() {
-		}
-
-		public IncludesId(PlaylistId playlistId, SongId songId) {
-			this.playlistId = playlistId;
-			this.songId = songId;
 		}
 
 		public IncludesId(String playlistTitle, String creatorUsername, 
 			String songTitle, String albumTitle, 
 			String primaryAlbumArtistUsername, Date albumReleaseDate) {
-			this.playlistId = new PlaylistId(playlistTitle, creatorUsername);
-			this.songId = new SongId(songTitle, albumTitle, primaryAlbumArtistUsername, albumReleaseDate);
+			this.playlistTitle = playlistTitle;
+			this.creatorUsername = creatorUsername;
+			this.songTitle = songTitle;
+			this.albumTitle = albumTitle;
+			this.primaryAlbumArtistUsername = primaryAlbumArtistUsername;
+			this.albumReleaseDate = albumReleaseDate;
 		}
 
-		public PlaylistId getPlaylistId() {
-			return playlistId;
+		// Getters and setters
+		public String getPlaylistTitle() {
+			return playlistTitle;
 		}
 
-		public void setPlaylistId(PlaylistId playlistId) {
-			this.playlistId = playlistId;
+		public void setPlaylistTitle(String playlistTitle) {
+			this.playlistTitle = playlistTitle;
 		}
 
-		public SongId getSongId() {
-			return songId;
+		public String getCreatorUsername() {
+			return creatorUsername;
 		}
 
-		public void setSongId(SongId songId) {
-			this.songId = songId;
+		public void setCreatorUsername(String creatorUsername) {
+			this.creatorUsername = creatorUsername;
+		}
+
+		public String getSongTitle() {
+			return songTitle;
+		}
+
+		public void setSongTitle(String songTitle) {
+			this.songTitle = songTitle;
+		}
+
+		public String getAlbumTitle() {
+			return albumTitle;
+		}
+
+		public void setAlbumTitle(String albumTitle) {
+			this.albumTitle = albumTitle;
+		}
+
+		public String getPrimaryAlbumArtistUsername() {
+			return primaryAlbumArtistUsername;
+		}
+
+		public void setPrimaryAlbumArtistUsername(String primaryAlbumArtistUsername) {
+			this.primaryAlbumArtistUsername = primaryAlbumArtistUsername;
+		}
+
+		public Date getAlbumReleaseDate() {
+			return albumReleaseDate;
+		}
+
+		public void setAlbumReleaseDate(Date albumReleaseDate) {
+			this.albumReleaseDate = albumReleaseDate;
 		}
 
 		@Override
@@ -193,12 +120,18 @@ public class Includes {
 			if (this == o) return true;
 			if (o == null || getClass() != o.getClass()) return false;
 			IncludesId that = (IncludesId) o;
-			return Objects.equals(playlistId, that.playlistId) && Objects.equals(songId, that.songId);
+			return Objects.equals(playlistTitle, that.playlistTitle) && 
+			Objects.equals(creatorUsername, that.creatorUsername) && 
+			Objects.equals(songTitle, that.songTitle) && 
+			Objects.equals(albumTitle, that.albumTitle) && 
+			Objects.equals(primaryAlbumArtistUsername, that.primaryAlbumArtistUsername) && 
+			Objects.equals(albumReleaseDate, that.albumReleaseDate);
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(playlistId, songId);
+			return Objects.hash(playlistTitle, creatorUsername, songTitle, albumTitle, 
+				primaryAlbumArtistUsername, albumReleaseDate);
 		}
 	}
 
@@ -214,7 +147,6 @@ public class Includes {
 	public Includes(Playlist playlist, Song song) {
 		this.playlist = playlist;
 		this.song = song;
-
 		this.id = new IncludesId(
 			playlist.getTitle(),
 			playlist.getCreator().getUsername(),
@@ -225,6 +157,7 @@ public class Includes {
 		);
 	}
 
+	// Getters and setters
 	public IncludesId getId() {
 		return id;
 	}
@@ -239,17 +172,11 @@ public class Includes {
 
 	public void setPlaylist(Playlist playlist) {
 		this.playlist = playlist;
-
 		if (id == null) {
 			id = new IncludesId();
 		}
-
-		if (id.getPlaylistId() == null) {
-			id.setPlaylistId(new IncludesId.PlaylistId());
-		}
-
-		id.getPlaylistId().setPlaylistTitle(playlist.getTitle());
-		id.getPlaylistId().setCreatorUsername(playlist.getCreator().getUsername());
+		id.setPlaylistTitle(playlist.getTitle());
+		id.setCreatorUsername(playlist.getCreator().getUsername());
 	}
 
 	public Song getSong() {
@@ -258,19 +185,13 @@ public class Includes {
 
 	public void setSong(Song song) {
 		this.song = song;
-
 		if (id == null) {
 			id = new IncludesId();
 		}
-
-		if (id.getSongId() == null) {
-			id.setSongId(new IncludesId.SongId());
-		}
-
-		id.getSongId().setSongTitle(song.getTitle());
-		id.getSongId().setAlbumTitle(song.getId().getAlbumTitle());
-		id.getSongId().setPrimaryAlbumArtistUsername(song.getId().getPrimaryAlbumArtistUsername());
-		id.getSongId().setAlbumReleaseDate(song.getId().getAlbumReleaseDate());
+		id.setSongTitle(song.getTitle());
+		id.setAlbumTitle(song.getId().getAlbumTitle());
+		id.setPrimaryAlbumArtistUsername(song.getId().getPrimaryAlbumArtistUsername());
+		id.setAlbumReleaseDate(song.getId().getAlbumReleaseDate());
 	}
 
 	@Override
